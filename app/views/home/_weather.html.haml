@@ -1,0 +1,84 @@
+- if weather['main'].present?
+  .row
+    .col
+      %h2.text-warning= "#{weather['name']}, #{weather['sys']['country']}"
+      %p
+        = "#{Time.now.strftime('%A')}, #{Time.now.strftime('%r')}"
+        %br
+        = weather['weather'][0]['main']
+        - if weather['weather'][0]['description'].present?
+          %small
+            = "(#{weather['weather'][0]['description']})"
+  .row
+    - if weather['main']['temp'].present?
+      .col.col-sm-6.col-md-4.mb-2
+        .card
+          .card-body
+            %h5.card-title Temperature
+            %p.card-text
+              = weather['main']['temp']
+              \&deg;
+    - if weather['main']['temp_min'].present?
+      .col.col-sm-6.col-md-4.mb-2
+        .card
+          .card-body
+            %h5.card-title Low Temperature
+            %p.card-text
+              = weather['main']['temp_min']
+              \&deg;
+    - if weather['main']['temp_max'].present?
+      .col.col-sm-6.col-md-4.mb-2
+        .card
+          .card-body
+            %h5.card-title High Temperature
+            %p.card-text
+              = weather['main']['temp_max']
+              \&deg;
+    - if weather['main']['pressure'].present?
+      .col.col-sm-6.col-md-4.mb-2
+        .card
+          .card-body
+            %h5.card-title Pressure
+            %p.card-text
+              = weather['main']['pressure']
+              hpa
+    - if weather['main']['humidity'].present?
+      .col.col-sm-6.col-md-4.mb-2
+        .card
+          .card-body
+            %h5.card-title Humidity
+            %p.card-text
+              = number_to_percentage(weather['main']['humidity'], precision: 2)
+    - if weather['wind']['speed'].present?
+      .col.col-sm-6.col-md-4.mb-2
+        .card
+          .card-body
+            %h5.card-title Wind Speed
+            %p.card-text
+              = weather['wind']['speed']
+              m/s
+
+    .col.col-sm-6.col-md-4.mb-2
+      .card
+        .card-body
+          %h5.card-title Geo coords
+          %p.card-text
+            [
+            = weather['coord']['lat']
+            ,
+            = weather['coord']['lon']
+            ]
+    .col.col-sm-6.col-md-4.mb-2
+      .card
+        .card-body
+          %h5.card-title SunRise
+          %p.card-text= Time.at(weather['sys']['sunrise']).strftime("%I:%M:%S %p")
+    .col.col-sm-6.col-md-4.mb-2
+      .card
+        .card-body
+          %h5.card-title SunSet
+          %p.card-text= Time.at(weather['sys']['sunset']).strftime("%I:%M:%S %p")
+- else
+  .row
+    .col.mt-sm-5
+      %h3.text-center.text-danger Sorry something went wrong!

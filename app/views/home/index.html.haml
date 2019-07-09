@@ -1,0 +1,19 @@
+.jumbotron.text-center
+  %h1 My City Temperature
+.container
+  .row
+    .col
+      .card.pt-3.px-3.pb-2
+        %form{ action: '#', class: 'form-inline' }
+          .form-check
+            %label.form-check-label.mb-2.mr-sm-2
+              %input#current_location.form-check-input{ name: 'current_location', type: 'checkbox', value: '' }
+              Current Location
+
+          %lable.mb-2.mr-sm-2.px-sm-5.text-center{ for: 'city' } or
+
+          %lable.mb-2.mr-sm-2{ for: 'city' } City:
+          = select_tag 'city', options_for_select(cities, 'California,us'), include_blank: true, class: 'city form-control mb-2 mr-sm-2'
+          %button#search.btn.btn-primary.mb-2.ml-sm-5{ type: 'button' } Temperature
+  #weather.mt-2
+    = render partial: 'weather', locals: { weather: @weather }
