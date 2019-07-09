@@ -8,7 +8,7 @@ Temperature is a Rails application shows weather of current location or popular 
 
 ### How to start
 ```sh
-$ git clone git@github.com:krunalcp/temperature.git
+$ git clone https://github.com/krunalcp/temperature.git
 $ cd temperature
 $ bundle install
 $ echo 'b65be5353dd22cc260b49342309fd955' > config/master.key
